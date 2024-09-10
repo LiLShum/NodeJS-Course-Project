@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>Добавление сотрудника</h1>
+    <form id="addEmployeeForm" action="/addEmployee" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="employeeName">Имя сотрудника</label>
+            <input type="text" class="form-control" id="employeeName" name="employeeName" required>
+        </div>
+        <div class="form-group">
+            <label for="sex">Пол</label>
+            <select class="form-select" id="sex" name="sex">
+                <option value="мужской">мужской</option>
+                <option value="женский">женский</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="image_path" class="form-label">Путь к изображению:</label>
+            <input type="file" class="form-control" id="image_path" name="image_path" accept="image/*" required>
+        </div>
+        <div class="form-group">
+            <label for="services">Выберите сервисы</label>
+            <select multiple="multiple" class="form-control" id="services" name="services[]" required>
+                {{#each services}}
+                    <option value="{{this.service_id}}">{{this.service_name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить сотрудника</button>
+    </form>
+</div>

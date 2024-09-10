@@ -1,0 +1,12 @@
+<div class="registerContainer" style="display: flex; flex-direction: column">
+    <form class="registrationForm" action="/register" method="post">
+        <input type="text" name="username" placeholder="Имя пользователя">
+        <input type="email" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Пароль">
+        <button type="submit">Зарегистрироваться</button>
+        <a href="/login">Войти</a>
+    </form>
+    <div class="error">
+        <h1 style="color: red">{{error}}</h1>
+    </div>
+</div>

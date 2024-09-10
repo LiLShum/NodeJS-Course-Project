@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Employees {
+  employee_id      String             @id(map: "PK__Employee__C52E0BA86249976B") @db.NVarChar(50)
+  employee_name    String             @db.NVarChar(50)
+  sex              String             @db.NVarChar(10)
+  image_path       String?            @db.NVarChar(200)
+  Employee_Service Employee_Service[]
+}
+
+model Orders {
+  order_id      String   @id(map: "PK__Orders__465962295D721451") @db.NVarChar(50)
+  user_id       String   @db.NVarChar(50)
+  employee_id   String   @db.NVarChar(50)
+  price         Float?   @db.SmallMoney
+  service_id    String   @db.NVarChar(50)
+  date_of_order DateTime @db.Date
+}
+
+model Services {
+  service_id       String             @id(map: "PK__Services__3E0DB8AF5AD4DF98") @db.NVarChar(50)
+  service_name     String             @db.NVarChar(50)
+  description      String             @db.NVarChar(300)
+  price            Float              @db.SmallMoney
+  image_path       String?            @db.NVarChar(150)
+  Employee_Service Employee_Service[]
+}
+
+model Messages {
+  message_id    String         @id(map: "PK__Messages__0BBF6EE614038CAF") @db.NVarChar(50)
+  message       String         @db.NVarChar(Max)
+  date_and_time DateTime
+  sender        String?        @db.NVarChar(100)
+  receiver      String?        @db.NVarChar(100)
+  User_message  User_message[]
+}
+
+model User_message {
+  message_id String   @db.NVarChar(50)
+  user_id    String   @db.NVarChar(50)
+  Messages   Messages @relation(fields: [message_id], references: [message_id], onUpdate: NoAction, map: "User_message_Messages_message_id_fk")
+  Users      Users    @relation(fields: [user_id], references: [user_id], onUpdate: NoAction, map: "User_message_Users_user_id_fk")
+
+  @@id([message_id, user_id], map: "User_message_pk")
+}
+
+model Users {
+  user_id      String         @id(map: "PK__Users__B9BE370FBDEF3FDA") @db.NVarChar(50)
+  username     String         @db.NVarChar(50)
+  email        String         @unique(map: "Users_pk") @db.NVarChar(50)
+  password     String         @db.NVarChar(50)
+  role         String         @db.NVarChar(10)
+  User_message User_message[]
+}
+
+model Employee_Service {
+  employee_id  String    @db.NVarChar(50)
+  service_id   String    @db.NVarChar(50)
+  service_name String?   @db.NVarChar(70)
+  Employees    Employees @relation(fields: [employee_id], references: [employee_id], onUpdate: NoAction, map: "employee_fk")
+  Services     Services  @relation(fields: [service_id], references: [service_id], onUpdate: NoAction, map: "service_fk")
+
+  @@id([service_id, employee_id], map: "Employee_Service_pk")
+}

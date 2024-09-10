@@ -1,0 +1,12 @@
+<h1>Выберите пользователя для чата:</h1>
+<ul>
+    {{#each users}}
+        <li><button onclick="openChat('{{this.user_id}}')">{{this.username}}</button></li>
+    {{/each}}
+</ul>
+
+<script>
+    function openChat(userId) {
+        window.location.href = `/chat/${userId}`;
+    }
+</script>

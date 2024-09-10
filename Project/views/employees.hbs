@@ -1,0 +1,52 @@
+<h1>Сотрудники</h1>
+<div class="card_list">
+    <form id="filterForm" action="/filterEmployees" method="POST">
+        <div class="mb-3">
+            <label for="gender" class="form-label">Фильтр по полу:</label>
+            <select class="form-select" id="gender" name="gender">
+                <option value="">Все</option>
+                <option value="Мужской">Мужской</option>
+                <option value="Женский">Женский</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="nameSearch" class="form-label">Поиск по имени:</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Введите имя">
+        </div>
+        <button type="submit" class="btn btn-primary">Применить фильтр</button>
+    </form>
+    {{#if isAdmin}}
+        {{#each employees}}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <img src="{{this.image_path}}" class="card-img-top" style="height: 150px">
+                    <h5 class="card-title">{{this.employee_name}}</h5>
+                    <p class="card-text">Пол: {{this.sex}}</p>
+                    <p class="card-text">Доступные услуги:</p>
+                    <ul>
+                        {{#each this.Employee_Service}}
+                            <li>{{this.service_name}}</li>
+                        {{/each}}
+                    </ul>
+                    <button class="btn btn-primary deleteButtonEmployee" data-employee-id="{{this.employee_id}}">Удалить</button>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        {{#each employees}}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <img src="{{this.image_path}}" class="card-img-top" style="height: 150px">
+                    <h5 class="card-title">{{this.employee_name}}</h5>
+                    <p class="card-text">Пол: {{this.sex}}</p>
+                    <p class="card-text">Доступные услуги:</p>
+                    <ul>
+                        {{#each this.Employee_Service}}
+                            <li>{{this.service_name}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        {{/each}}
+    {{/if}}
+</div>

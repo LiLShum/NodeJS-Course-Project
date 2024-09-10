@@ -1,0 +1,10 @@
+<form action="/updateEmployee" method="POST">
+    <input type="hidden" name="employee_id" value="{{employee.employee_id}}">
+    <label for="employee_name">Employee Name:</label>
+    <input type="text" id="employee_name" name="employee_name" value="{{employee.employee_name}}" required><br>
+    <label for="sex">Sex:</label>
+    <input type="text" id="sex" name="sex" value="{{employee.sex}}" required><br>
+    <label for="service_ids">Service IDs:</label>
+    <input type="text" id="service_ids" name="service_ids" value="{{#each employee.services}}{{this.service_id}}{{#unless @last}}, {{/unless}}{{/each}}" required><br>
+    <button type="submit">Update Employee</button>
+</form>

@@ -1,0 +1,16 @@
+<div class="profile-container">
+    <h1>Профиль пользователя</h1>
+    <div class="profile-info">
+        <p><strong>Имя пользователя:</strong> {{user.username}}</p>
+        <p><strong>Email:</strong> {{user.email}}</p>
+        {{#if isAdmin}}
+            <p><strong>Роль:</strong> Администратор</p>
+        {{else}}
+            <p><strong>Роль:</strong> Пользователь</p>
+        {{/if}}
+        {{#if isAdmin}}
+            {{>adminPanel}}
+        {{/if}}
+    </div>
+    <a id="edit-profile-btn" href="/updateProfile">Редактировать профиль</a>
+</div>

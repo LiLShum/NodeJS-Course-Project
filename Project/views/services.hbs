@@ -1,0 +1,30 @@
+<h1>Список услуг</h1>
+
+<div class="card_list">
+    {{#if isAdmin}}
+        {{#each services}}
+            <div class="card" style="width: 18rem;">
+                <img src="{{this.image_path}}" class="card-img-top" alt="{{this.service_name}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.service_name}}</h5>
+                    <p class="card-text">{{this.description}}<h4>{{this.price}} BYN</h4></p>
+                    <a href="/createOrder" class="btn btn-primary">Заказать</a>
+                    <button class="btn btn-primary deleteButtonService" data-service-id="{{this.service_id}}">Удалить</button>
+                    <a class="btn btn-primary" href="/updateService/{{this.service_id}}">Обновить</a>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+    {{#each services}}
+        <div class="card" style="width: 18rem;">
+            <img src="{{this.image_path}}" class="card-img-top" alt="{{this.service_name}}">
+            <div class="card-body">
+                <h5 class="card-title">{{this.service_name}}</h5>
+                <p class="card-text">{{this.description}}<h4>{{this.price}} BYN</h4></p>
+                <a href="/createOrder" class="btn btn-primary">Заказать</a>
+            </div>
+        </div>
+    {{/each}}
+    {{/if}}
+    <h1 style="color: red;">{{error}}</h1>
+</div>
